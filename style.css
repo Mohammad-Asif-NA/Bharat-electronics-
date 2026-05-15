@@ -1,0 +1,379 @@
+/* ============================================
+   BHARAT ELECTRONICS — style.css
+   Hatana ho to index.html mein comment karo:
+   <!-- <link rel="stylesheet" href="style.css" /> -->
+   ============================================ */
+
+/* ── VARIABLES ── */
+:root {
+  --gold:       #C9A84C;
+  --gold-light: #F0D080;
+  --gold-dim:   rgba(201,168,76,0.15);
+  --dark:       #080810;
+  --dark2:      #10101A;
+  --dark3:      #181825;
+  --dark4:      #1E1E2E;
+  --white:      #F2EDE4;
+  --muted:      #7A7A92;
+  --green:      #2ECC71;
+  --green-dim:  rgba(46,204,113,0.12);
+}
+
+/* ── RESET ── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ── BODY ── */
+body {
+  background: var(--dark);
+  color: var(--white);
+  font-family: 'Outfit', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Background glow */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% -5%, rgba(201,168,76,0.22) 0%, transparent 65%),
+    radial-gradient(ellipse 35% 35% at 85% 75%, rgba(201,168,76,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 30% 30% at 15% 90%, rgba(80,60,200,0.06) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Noise overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* ── CONTAINER ── */
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 0 72px;
+}
+
+/* ── HEADER ── */
+.header {
+  text-align: center;
+  padding: 52px 24px 36px;
+}
+
+.logo-ring {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  border: 1.5px solid var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 22px;
+  background: var(--dark2);
+  box-shadow: 0 0 40px rgba(201,168,76,0.28), inset 0 0 24px rgba(201,168,76,0.06);
+  animation: halo 4s ease-in-out infinite;
+}
+
+@keyframes halo {
+  0%, 100% { box-shadow: 0 0 40px rgba(201,168,76,0.28), inset 0 0 24px rgba(201,168,76,0.06); }
+  50%       { box-shadow: 0 0 64px rgba(201,168,76,0.45), inset 0 0 24px rgba(201,168,76,0.10); }
+}
+
+.logo-icon { font-size: 38px; }
+
+.shop-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 34px;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 60%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.15;
+}
+
+.tagline {
+  margin-top: 8px;
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  font-weight: 300;
+}
+
+.divider-gold {
+  width: 56px;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 20px auto 0;
+}
+
+/* ── SECTION ── */
+.section {
+  padding: 0 18px;
+  margin-top: 28px;
+}
+
+.section-label {
+  font-size: 9.5px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+  padding-left: 4px;
+  opacity: 0.85;
+}
+
+/* ── INFO CARD ── */
+.info-card {
+  background: var(--dark2);
+  border: 1px solid rgba(201,168,76,0.14);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 17px 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  transition: background 0.2s;
+}
+
+.info-row:last-child { border-bottom: none; }
+.info-row:active     { background: rgba(201,168,76,0.07); }
+
+.info-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  background: rgba(201,168,76,0.09);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  flex-shrink: 0;
+}
+
+.info-text  { flex: 1; min-width: 0; }
+.info-title { font-size: 10px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+.info-value { font-size: 15px; color: var(--white); font-weight: 500; }
+
+/* ── WORK GRID ── */
+.work-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.work-chip {
+  background: var(--dark3);
+  border: 1px solid rgba(201,168,76,0.14);
+  border-radius: 13px;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.work-chip-icon { font-size: 22px; line-height: 1; }
+.work-chip-text { font-size: 13px; font-weight: 500; color: var(--white); line-height: 1.3; }
+.work-chip-sub  { font-size: 10px; color: var(--muted); margin-top: 2px; }
+
+/* ── OWNERS ── */
+.owners-row { display: flex; gap: 12px; }
+
+.owner-card {
+  flex: 1;
+  background: var(--dark2);
+  border: 1px solid rgba(201,168,76,0.14);
+  border-radius: 18px;
+  padding: 20px 16px 18px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.owner-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.owner-photo {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 2px solid rgba(201,168,76,0.35);
+  margin: 0 auto 12px;
+  overflow: hidden;
+  background: var(--dark3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.owner-photo img           { width: 100%; height: 100%; object-fit: cover; display: block; }
+.owner-photo .photo-placeholder { font-size: 28px; opacity: 0.5; }
+
+.owner-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.3px;
+}
+
+.owner-role {
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-top: 4px;
+  opacity: 0.8;
+}
+
+/* ── BUTTONS ── */
+.btn-group {
+  padding: 0 18px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: 'Outfit', sans-serif;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+  letter-spacing: 0.3px;
+}
+
+.btn:active { transform: scale(0.97); opacity: 0.88; }
+
+.btn-primary {
+  background: linear-gradient(135deg, #B8913E, #F0D080, #C9A84C);
+  background-size: 200%;
+  color: #080810;
+  font-weight: 600;
+  box-shadow: 0 8px 28px rgba(201,168,76,0.38);
+  animation: shimmer 4s linear infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.btn-secondary {
+  background: var(--dark3);
+  color: var(--white);
+  border: 1px solid rgba(201,168,76,0.22);
+}
+
+.btn-call {
+  background: var(--green-dim);
+  color: var(--green);
+  border: 1px solid rgba(46,204,113,0.25);
+}
+
+/* ── MAP BOX ── */
+.map-section {
+  padding: 0 18px;
+  margin-top: 10px;
+}
+
+.map-box {
+  background: var(--dark2);
+  border: 1px solid rgba(201,168,76,0.14);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.map-placeholder {
+  height: 150px;
+  background: linear-gradient(135deg, var(--dark4), var(--dark3));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.map-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent, transparent 22px,
+    rgba(201,168,76,0.03) 22px, rgba(201,168,76,0.03) 44px
+  );
+}
+
+.map-pin  { font-size: 34px; animation: bounce 2s ease-in-out infinite; }
+.map-text { font-size: 11px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+
+.map-footer {
+  padding: 13px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.map-footer-text { font-size: 13px; color: var(--muted); }
+.map-open-btn    { font-size: 12px; color: var(--gold); font-weight: 500; text-decoration: none; letter-spacing: 0.5px; }
+
+/* ── FOOTER ── */
+.footer     { text-align: center; padding: 44px 24px 0; }
+.footer-line { width: 36px; height: 1px; background: rgba(201,168,76,0.25); margin: 0 auto 14px; }
+.footer-text { font-size: 10px; color: rgba(122,122,146,0.45); letter-spacing: 2.5px; text-transform: uppercase; }
+
+/* ── ANIMATIONS ── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(22px);
+  animation: fadeUp 0.65s ease forwards;
+}
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.d1 { animation-delay: 0.05s; }
+.d2 { animation-delay: 0.15s; }
+.d3 { animation-delay: 0.25s; }
+.d4 { animation-delay: 0.35s; }
+.d5 { animation-delay: 0.45s; }
+.d6 { animation-delay: 0.55s; }
